@@ -3,7 +3,7 @@
 
 
 **Board:**
-- *SKR 1.4 Turbo*
+- *BigTreeTech - SKR 1.4 Turbo*
 
 **Stepper-Driver:**
 - *TMC2208*
