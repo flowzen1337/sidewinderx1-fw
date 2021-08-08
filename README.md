@@ -1,5 +1,5 @@
 **Printer:**
-- *Sidewinder X1*
+- *Artillery Sidewinder X1*
 
 
 **Board:**
