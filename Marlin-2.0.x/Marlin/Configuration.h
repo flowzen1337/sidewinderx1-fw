@@ -143,7 +143,7 @@
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "N1ceW!nder X1"      // DIGA-Tech:
+#define CUSTOM_MACHINE_NAME "TMC2208 N1ceW!nder X1"      // DIGA-Tech:
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -579,9 +579,9 @@
     #define DEFAULT_Ki_LIST {   1.08,   1.08 }
     #define DEFAULT_Kd_LIST { 114.00, 114.00 }
   #else
-    #define DEFAULT_Kp  16.7263
-    #define DEFAULT_Ki   1.2512
-    #define DEFAULT_Kd 55.9015
+    #define DEFAULT_Kp  17.0425
+    #define DEFAULT_Ki   1.2570
+    #define DEFAULT_Kd 57.7677
   #endif
 #endif // PIDTEMP
 
@@ -620,9 +620,9 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 58.7294
-  #define DEFAULT_bedKi 11.7341
-  #define DEFAULT_bedKd 195.9603
+  #define DEFAULT_bedKp 45.5105
+  #define DEFAULT_bedKi 8.4193
+  #define DEFAULT_bedKd 164.0048
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -816,11 +816,20 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'L6474', 'POWERSTEP01', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
+
+/*
 #define X_DRIVER_TYPE    TMC2209                           // DIGA-Tech:
 #define Y_DRIVER_TYPE    TMC2209                           // DIGA-Tech:
 #define Z_DRIVER_TYPE    TMC2209                           // DIGA-Tech:
 #define Z2_DRIVER_TYPE   TMC2209                           // DIGA-Tech:
 #define E0_DRIVER_TYPE   TMC2209                           // DIGA-Tech:
+*/
+
+#define X_DRIVER_TYPE    TMC2208_STANDALONE                           // DIGA-Tech:
+#define Y_DRIVER_TYPE    TMC2208_STANDALONE                           // DIGA-Tech:
+#define Z_DRIVER_TYPE    TMC2208_STANDALONE                           // DIGA-Tech:
+#define Z2_DRIVER_TYPE   TMC2208_STANDALONE                           // DIGA-Tech:
+#define E0_DRIVER_TYPE   TMC2208_STANDALONE                           // DIGA-Tech:
 
 // Enable this feature if all enabled endstop pins are interrupt-capable.
 // This will remove the need to poll the interrupt pins, saving many CPU cycles.
@@ -868,7 +877,10 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.121, 80.121, 399.778, 445 }         // DIGA-Tech:
+
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 40, 40, 205, 220 }         // DIGA-Tech:
+
+//#define DEFAULT_AXIS_STEPS_PER_UNIT { 80, 80, 400, 100 }
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -905,7 +917,7 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          600                                                                   // Flowzen1337: Decreased values
+#define DEFAULT_ACCELERATION          1000                                                                   // Flowzen1337: Decreased values
 //#define DEFAULT_ACCELERATION          800     // X, Y, Z and E acceleration for printing moves               // Artillery: default values
 #define DEFAULT_RETRACT_ACCELERATION  10000   // E acceleration for retracts                                 // DIGA-Tech:
 #define DEFAULT_TRAVEL_ACCELERATION   800    // X, Y, Z acceleration for travel (non printing) moves        // DIGA-Tech:
@@ -918,7 +930,7 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
-#define CLASSIC_JERK                                       // DIGA-Tech:
+//#define CLASSIC_JERK                                       // DIGA-Tech:
 #if ENABLED(CLASSIC_JERK)
   #define DEFAULT_XJERK  12.0                               // DIGA-Tech:
   #define DEFAULT_YJERK  12.0                               // DIGA-Tech:
@@ -932,7 +944,7 @@
   #endif
 #endif
 
-#define DEFAULT_EJERK    10.0  // May be used by Linear Advance
+#define DEFAULT_EJERK    5.0  // May be used by Linear Advance
 
 /**
  * Junction Deviation Factor
@@ -1120,7 +1132,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 33, -22, -3.80 }              // Flowzen1337
+#define NOZZLE_TO_PROBE_OFFSET { 33, -22, -3.60 }              // Flowzen1337
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -1668,7 +1680,7 @@
 #endif
 
 // Homing speeds (mm/min)
-#define HOMING_FEEDRATE_MM_M { (50*60), (50*60), (12*60) }  // Flowzen1337
+#define HOMING_FEEDRATE_MM_M { (70*60), (70*60), (20*60) }  // Flowzen1337
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
